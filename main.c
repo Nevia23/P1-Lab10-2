@@ -23,7 +23,7 @@ int main() {
 
     char modalita[10] = "1vsCPU";
     char board[BOARD_SIZE];
-    char turno = 0;
+    char turno = 1;
 
     if (carica == 's') {
         carica_partita (modalita, board, &turno);
@@ -44,7 +44,7 @@ int main() {
     char continua = 's'; //indica la volontà del giocatore di continuare a giocare
 
     while(continua == 's'){
-        
+        print_board(board);
         gioca (modalita, board, turno);
         reset_board(board);
 
