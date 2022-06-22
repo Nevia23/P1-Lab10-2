@@ -5,7 +5,13 @@
     Gioca una partita di tris. I parametri della funzione sono la board, e  due puntatori a funzioni che indicano il tipo di giocatore,
     se umano o computer. In particolare le funzioni indicano come la prossima mossa debba essere scelta, sono disponibili in giocatore.h.
  */
-void gioca(char board[], void (*p1)(int *x, int *y), void (*p2)(int *x, int *y));
+
+void carica_partita (char mod[], char board[], char *turno);
+
+void sovrascrivi_partita (char mod[], char board[], char turno);
+
+void gioca (char mod[], char board[], char turno);
+
 /*
  * PRE board ha dimensione BOARD_SIZE
  * POST Una partita completa di tris è stata giocata (vedere dettagli sotto)

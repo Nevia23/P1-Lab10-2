@@ -3,7 +3,15 @@
 #include "giocatore.h"
 #include <stdio.h>
 
-void gioca(char board[], void(*p1)(int *x, int *y), void(*p2)(int *x, int *y)) {
+void carica_partita (char mod[], char board[], char *turno) {
+
+}
+
+void sovrascrivi_partita (char mod[], char board[], char turno) {
+
+}
+
+void gioca(char mod[], char board[], char turno) {
 
     int turno = 1;
     int mossa_x, mossa_y;
