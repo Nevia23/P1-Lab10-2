@@ -10,6 +10,8 @@ void carica_partita (char mod[], char board[], char *turno);
 
 void sovrascrivi_partita (char mod[], char board[], char turno);
 
+void aggiorna_partita(int x, int y, char simbolo);
+
 void gioca (char mod[], char board[], char turno);
 
 /*

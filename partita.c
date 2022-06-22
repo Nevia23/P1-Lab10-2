@@ -33,6 +33,16 @@ void carica_partita (char mod[], char board[], char *turno) {
 
 void sovrascrivi_partita (char mod[], char board[], char turno) {
 
+    FILE *fp;
+
+    if (strcmp (mod, "1vs1") == 0) {
+        fputc ('0', fp);
+    } else {
+        fputc ('1', fp);
+    }
+
+    if (turno == 1) {}
+
 }
 
 void aggiorna_partita(int x, int y, char simbolo) {
