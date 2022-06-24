@@ -1,6 +1,11 @@
 #ifndef PARTITA_H
 #define PARTITA_H
 
+#include <stdio.h>
+#include <string.h>
+#include "board.h"
+#include "giocatore.h"
+
 /*
     Gioca una partita di tris. I parametri della funzione sono la board, e  due puntatori a funzioni che indicano il tipo di giocatore,
     se umano o computer. In particolare le funzioni indicano come la prossima mossa debba essere scelta, sono disponibili in giocatore.h.

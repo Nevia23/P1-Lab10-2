@@ -23,7 +23,7 @@ int main() {
 
     char modalita[10] = "1vsCPU";
     char board[BOARD_SIZE];
-    char turno = 1;
+    char turno = 0;
 
     if (carica == 's') {
         carica_partita (modalita, board, &turno);

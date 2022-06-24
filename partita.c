@@ -1,7 +1,4 @@
 #include "partita.h"
-#include "board.h"
-#include "giocatore.h"
-#include <stdio.h>
 
 void carica_partita (char mod[], char board[], char *turno) {
 
@@ -18,9 +15,9 @@ void carica_partita (char mod[], char board[], char *turno) {
     ch = fgetc(fp);
 
     if (ch == '1') {
-        *turno = 1;
+        *turno = 0;
     } else {
-        *turno = 2;
+        *turno = 1;
     }
 
     int i;
@@ -33,7 +30,7 @@ void carica_partita (char mod[], char board[], char *turno) {
 
 void sovrascrivi_partita (char mod[], char board[], char turno) {
 
-    FILE *fp;
+    FILE *fp = fopen("cache", "w");
 
     if (strcmp (mod, "1vs1") == 0) {
         fputc ('0', fp);
@@ -41,12 +38,31 @@ void sovrascrivi_partita (char mod[], char board[], char turno) {
         fputc ('1', fp);
     }
 
-    if (turno == 1) {}
+    if (turno == 0) {
+        fputc ('0', fp);
+    } else {
+        fputc ('1', fp);
+    }
 
+    int i;
+
+    for (i = 0; i < BOARD_SIZE; i++) {
+        fputc (board[i], fp);
+    }
+
+    fclose (fp);
 }
 
 void aggiorna_partita(int x, int y, char simbolo) {
 
+    FILE *fp = fopen ("cache", "r+");
+
+    int pos = 2 + (x * BOARD_LATO) + y;
+
+    fseek (fp, pos, SEEK_SET);
+    fputc (simbolo, fp);
+
+    fclose (fp);
 }
 
 void gioca(char mod[], char board[], char turno) {
@@ -63,7 +79,7 @@ void gioca(char mod[], char board[], char turno) {
     int mossa_x, mossa_y;
 
     while (board_vincente(board)==0 && board_riempita(board)==0) {
-        if (turno == 1) {
+        if (turno == 0) {
             p1(&mossa_x, &mossa_y);
 
             while (mossa_ammissibile (board, mossa_x, mossa_y) == 0) {
@@ -71,9 +87,9 @@ void gioca(char mod[], char board[], char turno) {
             }
 
             effettua_mossa (board, mossa_x, mossa_y, SIMB_X);
-            aggiorna_mossa (mossa_x, mossa_y, SIMB_X);
+            aggiorna_partita (mossa_x, mossa_y, SIMB_X);
 
-            turno = 2;
+            turno = 1;
         } else {
             p2(&mossa_x, &mossa_y);
 
@@ -82,9 +98,9 @@ void gioca(char mod[], char board[], char turno) {
             }
 
             effettua_mossa (board, mossa_x, mossa_y, SIMB_O);
-            aggiorna_mossa (mossa_x, mossa_y, SIMB_O);
+            aggiorna_partita (mossa_x, mossa_y, SIMB_O);
 
-            turno = 1;
+            turno = 0;
         }
 
         print_board (board);
